@@ -21,7 +21,7 @@ import {
 import Divider from "./components/divider";
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
-import { CharactersEmptyState } from "./components/characters-empty-state";
+import { EmptyState } from "./components/empty-state";
 
 function App() {
   const [characters, setCharacters] = useState<MarvelApi<Characters>>({
@@ -311,7 +311,7 @@ function App() {
           </div>
 
           {characters.total === 0 ? (
-            <CharactersEmptyState />
+            <EmptyState />
           ) : (
             <>
               {/* feed-item-content d-flex flex-column pt-2 pb-2 border color-border-default rounded-2 color-shadow-small width-full height-fit */}
