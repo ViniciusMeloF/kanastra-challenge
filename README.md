@@ -1,27 +1,60 @@
-# React + TypeScript + Vite
+# Kanastra - Hiring Challenge 💼💻
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bem-vindos ao repositório do desafio da **Kanastra** para a posição de Software Engineer com foco em FrontEnd.
+Este README contém todas as informações e instruções necessárias.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend ReactJS**: Ao acessar a aplicação, você será calorosamente recebido pela tela "Hello Kanastra".
+- **Testes Unitários:** Testes unitários implementados utilizando vitest para garantir a qualidade e a confiabilidade do código.
 
-## Expanding the ESLint configuration
+## 🚀 Instruções de Execução
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Pré-requisitos
 
-- Configure the top-level `parserOptions` property like this:
+- Node ^v16.17.1
+- NPM ^8.15.0
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+1. **Instalar dependecias**: Vamos garantir que todas as dependecias estejam instaladas.
+   Execute o comando:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+   ```sh
+      npm install
+   ```
+
+2. **Rodando o projeto**: Com as dependecias instaladas, é hora de executar nossa aplicação:
+
+   ```sh
+      npm run dev
+   ```
+
+### Acessando a Aplicação
+
+Após a aplicacao estar em execução, acesse `http://localhost:5173` e você será redirecionado para a aplicação React.
+
+## 🧪 Testes Unitários com Vitest
+
+Para assegurar a qualidade e o correto funcionamento das funcionalidades do sistema, é essencial realizar testes unitários. Siga os comandos abaixo para executar os testes no ambiente Docker:
+
+1. **Execução dos Testes**: Dentro do container, execute os testes com o `pytest`:
+
+   ```sh
+   npm run vitest
+   ```
+
+2. **Relatório de Cobertura**: Após a execução dos testes, gere o relatório de cobertura:
+
+   ```sh
+   npm run coverage
+   ```
+
+3. **Relatório HTML**: Para uma visualização mais detalhada e formatada, gere o relatório em HTML:
+   ```sh
+   npm run coverage html
+   ```
+
+## 📬 Contato
+
+- **Email**: [vinicius.melo98@hotmail.com](mailto:vinicius.melo98@hotmail.com)
+- **Email2**: [viniciusmelo.dev@gmail.com](mailto:viniciusmelo.dev@gmail.com)
+- **LinkedIn**: [Vinicius Melo](https://www.linkedin.com/in/viniciusmelof)

@@ -1,72 +1,62 @@
 import { useEffect, useState } from "react";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useCharacters } from "@/contexts/CharactersContext";
+import { MARVEL_INITIAL_STATE } from "@/utils/constants";
 import { api } from "@/api";
 
 import { CharacterMediaList } from "./character-media-list";
+import { EmptyState } from "./empty-state";
 
-interface CharacterDetailsProps {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  character: Characters;
-}
+export function CharacterDetails() {
+  const { DETAILS_CONTROLLER } = useCharacters();
 
-// TODO: Adicionar tratativa de erro
-export function CharacterDetails({
-  character,
-  open,
-  setOpen,
-}: CharacterDetailsProps) {
-  const [loadingComics, setLoadingComics] = useState(true);
-  const [loadingSeries, setLoadingSeries] = useState(true);
-  const [comics, setComics] = useState<MarvelApi<Comics>>({
-    offset: 0,
-    limit: 20,
-    total: 0,
-    count: 0,
-    results: [],
-  });
-  const [series, setSeries] = useState<MarvelApi<Series>>({
-    offset: 0,
-    limit: 20,
-    total: 0,
-    count: 0,
-    results: [],
-  });
+  const [isLoadingComics, setIsLoadingComics] = useState(true);
+  const [isErrorComics, setIsErrorComics] = useState(false);
+
+  const [isLoadingSeries, setIsLoadingSeries] = useState(true);
+  const [isErrorSeries, setIsErrorSeries] = useState(false);
+
+  const [comics, setComics] = useState<MarvelApi<Comics>>(MARVEL_INITIAL_STATE);
+  const [series, setSeries] = useState<MarvelApi<Series>>(MARVEL_INITIAL_STATE);
 
   const fetchComics = async (offset = 0) => {
     try {
-      setLoadingComics(true);
+      setIsLoadingComics(true);
+      setIsErrorComics(false);
+
       const { data } = await api.get<MarvelApiResponse<Comics>>(
-        `${character.comics?.collectionURI}?apikey=3a1b49c04680bf0717ab0c222f363ffc&offset=${offset}`
+        `${DETAILS_CONTROLLER.selectedCharacter.comics?.collectionURI}?apikey=3a1b49c04680bf0717ab0c222f363ffc&offset=${offset}`
       );
 
       setComics((prevComics) => ({
         ...data,
         results: [...prevComics.results, ...data.results],
       }));
-    } catch (error) {
-      console.error(error);
+    } catch {
+      setIsErrorComics(true);
     } finally {
-      setLoadingComics(false);
+      setIsLoadingComics(false);
     }
   };
 
   const fetchSeries = async (offset = 0) => {
     try {
-      setLoadingSeries(true);
+      setIsLoadingSeries(true);
+      setIsErrorSeries(false);
+
       const { data } = await api.get<MarvelApiResponse<Series>>(
-        `${character.series?.collectionURI}?apikey=3a1b49c04680bf0717ab0c222f363ffc&offset=${offset}`
+        `${DETAILS_CONTROLLER.selectedCharacter.series?.collectionURI}?apikey=3a1b49c04680bf0717ab0c222f363ffc&offset=${offset}`
       );
 
       setSeries((prevSeries) => ({
         ...data,
         results: [...prevSeries.results, ...data.results],
       }));
-    } catch (error) {
-      console.error(error);
+    } catch {
+      setIsErrorSeries(true);
     } finally {
-      setLoadingSeries(false);
+      setIsLoadingSeries(false);
     }
   };
 
@@ -74,15 +64,18 @@ export function CharacterDetails({
     fetchComics();
     fetchSeries();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [character]);
+  }, [DETAILS_CONTROLLER.selectedCharacter]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={DETAILS_CONTROLLER.isOpen}
+      onOpenChange={DETAILS_CONTROLLER.handleClose}
+    >
       <DialogContent className="sm:max-w-[700px] max-h-[95%] max-w-[90%] overflow-y-auto">
         <header className="flex gap-4 flex-col sm:flex-row">
           <img
-            src={`${character?.thumbnail?.path}.${character?.thumbnail?.extension}`}
-            alt={character?.name}
+            src={`${DETAILS_CONTROLLER.selectedCharacter?.thumbnail?.path}.${DETAILS_CONTROLLER.selectedCharacter?.thumbnail?.extension}`}
+            alt={DETAILS_CONTROLLER.selectedCharacter?.name}
             width={400}
             height={500}
             className="rounded-3xl object-cover w-full self-center max-w-[200px] items-center sm:w-[150px] sm:self-auto"
@@ -90,28 +83,42 @@ export function CharacterDetails({
 
           <div className="w-full">
             <h2 className="text-3xl font-bold font-display text-red-500">
-              {character.name}
+              {DETAILS_CONTROLLER.selectedCharacter.name}
             </h2>
             <p className="text-gray-400 text-md font-body">
-              {character.description}
+              {DETAILS_CONTROLLER.selectedCharacter.description}
             </p>
           </div>
         </header>
 
         <main className="grid md:grid-cols-2 gap-6">
-          <CharacterMediaList
-            title="Comics"
-            media={comics}
-            isLoading={loadingComics}
-            handleShowMore={fetchComics}
-          />
+          {isErrorComics ? (
+            <EmptyState
+              title="There was a problem"
+              description="Try again later."
+            />
+          ) : (
+            <CharacterMediaList
+              title="Comics"
+              media={comics}
+              isLoading={isLoadingComics}
+              handleShowMore={fetchComics}
+            />
+          )}
 
-          <CharacterMediaList
-            title="Series"
-            media={series}
-            isLoading={loadingSeries}
-            handleShowMore={fetchSeries}
-          />
+          {isErrorSeries ? (
+            <EmptyState
+              title="There was a problem"
+              description="Try again later."
+            />
+          ) : (
+            <CharacterMediaList
+              title="Series"
+              media={series}
+              isLoading={isLoadingSeries}
+              handleShowMore={fetchSeries}
+            />
+          )}
         </main>
       </DialogContent>
     </Dialog>

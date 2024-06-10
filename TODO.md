@@ -1,27 +1,27 @@
-- Listar os personagens:
-  - Utilizar imagens e animacoes
-  - Paginacao de 20 em 20
-- Clicar personagem abrir modal contendo:
-  - Nome
-  - Descricao
-  - Quadrinhos
-  - Filmes/Series
+- Listar os personagens:✅
+  - Utilizar imagens e animacoes ✅
+  - Paginacao de 20 em 20 ✅
+- Clicar personagem abrir modal contendo:✅
+  - Nome ✅
+  - Descricao ✅
+  - Quadrinhos ✅
+  - Filmes/Series ✅
 - Filtro para listagem:
-  - Nome do personagem
+  - Nome do personagem✅
   - Nome do filme/series
 - Grafico:
-  - Quantidade de quadrinhos de cada personagem listado na respectiva pagina (tela)
+  - Quantidade de quadrinhos de cada personagem listado na respectiva pagina (tela)✅
 
 Pontos de Atencao!!!!
 
-- Utilizar React e Typescript com tipagens generics
-- SOLID
+- Utilizar React e Typescript com tipagens generics✅
+- SOLID✅
 - Testes unitarios e end-to-end com cypress
-- Estilizacoes nos componentes: Button, Inputs, Textos
-- Promise handling side effects
+- Estilizacoes nos componentes: Button, Inputs, Textos✅
+- Promise handling side effects✅
 - Error handling
-- Loading handling
-- Filters and pagination side effects
+- Loading handling✅
+- Filters and pagination side effects✅
 - Traducao utilizando tokenizacao com duas ou mais linguagens
 - Animacoes
 - Gerenciamento de estado global envitando prop drilling (ContextAPI)

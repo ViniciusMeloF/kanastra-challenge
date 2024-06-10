@@ -1,19 +1,12 @@
+import { useCharacters } from "@/contexts/CharactersContext";
 import { Skeleton } from "./ui/skeleton";
 
-interface CharacterListProps {
-  characters: MarvelApi<Characters>;
-  handleCardClick: (char: Characters) => void;
-  isLoading: boolean;
-}
+export function CharacterList() {
+  const { STATE_CONTROLLER, DETAILS_CONTROLLER } = useCharacters();
 
-export function CharacterList({
-  characters,
-  handleCardClick,
-  isLoading,
-}: CharacterListProps) {
   return (
     <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {isLoading ? (
+      {STATE_CONTROLLER.isLoading ? (
         Array.from({ length: 4 }).map((_, index) => (
           <Skeleton
             key={index}
@@ -22,11 +15,11 @@ export function CharacterList({
         ))
       ) : (
         <>
-          {characters.results.map((char) => (
+          {STATE_CONTROLLER.characters.results.map((char) => (
             <div
               key={char.id}
-              onClick={() => handleCardClick(char)}
-              className="overflow-hidden rounded-lg border-4 flex flex-col h-[315px] shadow-lg shadow-black cursor-pointer hover:transition-transform duration-300 ease-in-out hover:-translate-y-2"
+              onClick={() => DETAILS_CONTROLLER.handleOpen(char)}
+              className="overflow-hidden rounded-lg border-4 flex flex-col h-[350px] shadow-lg shadow-black cursor-pointer hover:transition-transform duration-300 ease-in-out hover:-translate-y-2"
             >
               <img
                 className="w-full h-[265px] object-cover aspect-square"

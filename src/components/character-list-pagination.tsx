@@ -9,18 +9,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "./ui/pagination";
+import { useCharacters } from "@/contexts/CharactersContext";
 
-interface CharacterListPaginationProps {
-  total: number;
-  currentPage: number;
-  handlePageChange: (page: number) => void;
-}
+export function CharacterListPagination() {
+  const { PAGINATION_CONTROLLER, STATE_CONTROLLER } = useCharacters();
 
-export function CharacterListPagination({
-  currentPage,
-  handlePageChange,
-  total,
-}: CharacterListPaginationProps) {
+  const total = STATE_CONTROLLER.characters.total;
+
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE) || 1;
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
@@ -31,8 +26,14 @@ export function CharacterListPagination({
     let localPages = [];
 
     if (totalPages > 5) {
-      const start = Math.max(2, currentPage - MAX_VISIBLE_PAGES);
-      const end = Math.min(totalPages - 1, currentPage + MAX_VISIBLE_PAGES);
+      const start = Math.max(
+        2,
+        PAGINATION_CONTROLLER.currentPage - MAX_VISIBLE_PAGES
+      );
+      const end = Math.min(
+        totalPages - 1,
+        PAGINATION_CONTROLLER.currentPage + MAX_VISIBLE_PAGES
+      );
 
       localPages.push(1);
       if (start > 2) localPages.push(ELLIPSIS);
@@ -53,8 +54,8 @@ export function CharacterListPagination({
           <PaginationEllipsis />
         ) : (
           <PaginationLink
-            isActive={currentPage === page}
-            onClick={() => handlePageChange(page)}
+            isActive={PAGINATION_CONTROLLER.currentPage === page}
+            onClick={() => PAGINATION_CONTROLLER.handlePageChange(page)}
           >
             {page}
           </PaginationLink>
@@ -69,8 +70,12 @@ export function CharacterListPagination({
         <PaginationItem>
           <PaginationPrevious
             className="cursor-pointer"
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
+            onClick={() =>
+              PAGINATION_CONTROLLER.handlePageChange(
+                PAGINATION_CONTROLLER.currentPage - 1
+              )
+            }
+            disabled={PAGINATION_CONTROLLER.currentPage === 1}
           />
         </PaginationItem>
 
@@ -79,8 +84,15 @@ export function CharacterListPagination({
         <PaginationItem>
           <PaginationNext
             className="cursor-pointer"
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === Math.ceil(total / ITEMS_PER_PAGE)}
+            onClick={() =>
+              PAGINATION_CONTROLLER.handlePageChange(
+                PAGINATION_CONTROLLER.currentPage + 1
+              )
+            }
+            disabled={
+              PAGINATION_CONTROLLER.currentPage ===
+              Math.ceil(total / ITEMS_PER_PAGE)
+            }
           />
         </PaginationItem>
       </PaginationContent>

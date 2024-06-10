@@ -10,17 +10,12 @@ import { Skeleton } from "./ui/skeleton";
 
 import { ComicsChart } from "./comics-chart";
 import { EmptyState } from "./empty-state";
+import { useCharacters } from "@/contexts/CharactersContext";
 
-interface ComicsChartSectionProps {
-  isLoading: boolean;
-  comicsChartData: ChartData;
-}
+export function ComicsChartSection() {
+  const { STATE_CONTROLLER } = useCharacters();
 
-export function ComicsChartSection({
-  isLoading,
-  comicsChartData,
-}: ComicsChartSectionProps) {
-  if (isLoading) {
+  if (STATE_CONTROLLER.isLoading) {
     return (
       <Skeleton className="flex flex-col overflow-hidden rounded-lg border flex-1 h-[500px] shadow-lg shadow-black mb-8" />
     );
@@ -46,8 +41,8 @@ export function ComicsChartSection({
       </div>
 
       <div className="w-full h-full">
-        {comicsChartData.categories.length > 0 ? (
-          <ComicsChart data={comicsChartData} />
+        {STATE_CONTROLLER.comicsDataChart.categories.length > 0 ? (
+          <ComicsChart data={STATE_CONTROLLER.comicsDataChart} />
         ) : (
           <EmptyState />
         )}
