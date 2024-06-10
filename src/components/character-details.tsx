@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useCharacters } from "@/contexts/CharactersContext";
 import { MARVEL_INITIAL_STATE } from "@/utils/constants";
-import { MARVEL_PUBLIC_KEY, api } from "@/api";
+import { MARVEL_API_URL, MARVEL_PUBLIC_KEY, api } from "@/api";
 import { ITEMS_PER_PAGE } from "@/utils/pagination";
 
 import { CharacterMediaList } from "./character-media-list";
@@ -36,7 +36,7 @@ export function CharacterDetails() {
       const queryString = new URLSearchParams(queryParams).toString();
 
       const { data } = await api.get<MarvelApiResponse<Comics>>(
-        `${DETAILS_CONTROLLER.selectedCharacter.comics?.collectionURI}?${queryString}`
+        `${MARVEL_API_URL}/characters/${DETAILS_CONTROLLER.selectedCharacter.id}/comics?${queryString}`
       );
 
       setComics((prevComics) => ({
@@ -63,7 +63,7 @@ export function CharacterDetails() {
       const queryString = new URLSearchParams(queryParams).toString();
 
       const { data } = await api.get<MarvelApiResponse<Series>>(
-        `${DETAILS_CONTROLLER.selectedCharacter.series?.collectionURI}?${queryString}`
+        `${MARVEL_API_URL}/characters/${DETAILS_CONTROLLER.selectedCharacter.id}/series?${queryString}`
       );
 
       setSeries((prevSeries) => ({
