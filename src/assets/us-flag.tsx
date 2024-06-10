@@ -3,7 +3,7 @@ export const USFlag = () => {
     <svg
       className="w-5 h-5"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 7410 3900"
     >
       <path fill="#b22234" d="M0 0h7410v3900H0z" />
@@ -22,19 +22,19 @@ export const USFlag = () => {
                   id="a"
                   d="M247 90l70.534 217.082-184.66-134.164h228.253L176.466 307.082z"
                 />
-                <use xlink:href="#a" y="420" />
-                <use xlink:href="#a" y="840" />
-                <use xlink:href="#a" y="1260" />
+                <use xlinkHref="#a" y="420" />
+                <use xlinkHref="#a" y="840" />
+                <use xlinkHref="#a" y="1260" />
               </g>
-              <use xlink:href="#a" y="1680" />
+              <use xlinkHref="#a" y="1680" />
             </g>
-            <use xlink:href="#b" x="247" y="210" />
+            <use xlinkHref="#b" x="247" y="210" />
           </g>
-          <use xlink:href="#c" x="494" />
+          <use xlinkHref="#c" x="494" />
         </g>
-        <use xlink:href="#d" x="988" />
-        <use xlink:href="#c" x="1976" />
-        <use xlink:href="#e" x="2470" />
+        <use xlinkHref="#d" x="988" />
+        <use xlinkHref="#c" x="1976" />
+        <use xlinkHref="#e" x="2470" />
       </g>
     </svg>
   );

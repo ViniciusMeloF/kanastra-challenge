@@ -3,7 +3,7 @@ export const BRFlag = () => {
     <svg
       className="h-5 w-5"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="-2100 -1470 4200 2940"
     >
       <defs>
@@ -39,31 +39,31 @@ export const BRFlag = () => {
           transform="translate(-31.5)"
           d="M0 0h63v-13H12v-18h40v-12H12v-14h48v-13H0z"
         />
-        <use id="q" xlink:href="#a" transform="scale(15)" />
-        <use id="s" xlink:href="#a" transform="scale(10.5)" />
-        <use id="r" xlink:href="#a" transform="scale(21)" />
-        <use id="o" xlink:href="#a" transform="scale(31.5)" />
-        <use id="p" xlink:href="#a" transform="scale(26.25)" />
+        <use id="q" xlinkHref="#a" transform="scale(15)" />
+        <use id="s" xlinkHref="#a" transform="scale(10.5)" />
+        <use id="r" xlinkHref="#a" transform="scale(21)" />
+        <use id="o" xlinkHref="#a" transform="scale(31.5)" />
+        <use id="p" xlinkHref="#a" transform="scale(26.25)" />
         <g id="a" fill="#fff">
           <g id="c">
             <path id="b" transform="rotate(18 0 -1)" d="M0-1v1h.5" />
-            <use xlink:href="#b" transform="scale(-1 1)" />
+            <use xlinkHref="#b" transform="scale(-1 1)" />
           </g>
-          <use xlink:href="#c" transform="rotate(72)" />
-          <use xlink:href="#c" transform="rotate(-72)" />
-          <use xlink:href="#c" transform="rotate(144)" />
-          <use xlink:href="#c" transform="rotate(216)" />
+          <use xlinkHref="#c" transform="rotate(72)" />
+          <use xlinkHref="#c" transform="rotate(-72)" />
+          <use xlinkHref="#c" transform="rotate(144)" />
+          <use xlinkHref="#c" transform="rotate(216)" />
         </g>
         <g id="m">
           <clipPath id="e">
             <path d="M-31.5 0v-70h63V0zM0-47v12h31.5v-12z" />
           </clipPath>
-          <use xlink:href="#d" clip-path="url(#e)" />
+          <use xlinkHref="#d" clip-path="url(#e)" />
           <path d="M5-35h26.5v10H5z" />
           <path d="M21.5-35h10V0h-10z" />
         </g>
         <g id="h">
-          <use xlink:href="#f" />
+          <use xlinkHref="#f" />
           <path d="M28 0c0-10 0-32-15-32H-6c22 0 22 22 22 32" />
         </g>
       </defs>
@@ -79,49 +79,49 @@ export const BRFlag = () => {
         clip-path="url(#g)"
       />
       <g transform="translate(-420 1470)" fill="#009b3a">
-        <use y="-1697.5" xlink:href="#d" transform="rotate(-7)" />
-        <use y="-1697.5" xlink:href="#h" transform="rotate(-4)" />
-        <use y="-1697.5" xlink:href="#i" transform="rotate(-1)" />
-        <use y="-1697.5" xlink:href="#j" transform="rotate(2)" />
-        <use y="-1697.5" xlink:href="#k" transform="rotate(5)" />
-        <use y="-1697.5" xlink:href="#l" transform="rotate(9.75)" />
-        <use y="-1697.5" xlink:href="#f" transform="rotate(14.5)" />
-        <use y="-1697.5" xlink:href="#h" transform="rotate(17.5)" />
-        <use y="-1697.5" xlink:href="#d" transform="rotate(20.5)" />
-        <use y="-1697.5" xlink:href="#m" transform="rotate(23.5)" />
-        <use y="-1697.5" xlink:href="#h" transform="rotate(26.5)" />
-        <use y="-1697.5" xlink:href="#j" transform="rotate(29.5)" />
-        <use y="-1697.5" xlink:href="#n" transform="rotate(32.5)" />
-        <use y="-1697.5" xlink:href="#n" transform="rotate(35.5)" />
-        <use y="-1697.5" xlink:href="#d" transform="rotate(38.5)" />
+        <use y="-1697.5" xlinkHref="#d" transform="rotate(-7)" />
+        <use y="-1697.5" xlinkHref="#h" transform="rotate(-4)" />
+        <use y="-1697.5" xlinkHref="#i" transform="rotate(-1)" />
+        <use y="-1697.5" xlinkHref="#j" transform="rotate(2)" />
+        <use y="-1697.5" xlinkHref="#k" transform="rotate(5)" />
+        <use y="-1697.5" xlinkHref="#l" transform="rotate(9.75)" />
+        <use y="-1697.5" xlinkHref="#f" transform="rotate(14.5)" />
+        <use y="-1697.5" xlinkHref="#h" transform="rotate(17.5)" />
+        <use y="-1697.5" xlinkHref="#d" transform="rotate(20.5)" />
+        <use y="-1697.5" xlinkHref="#m" transform="rotate(23.5)" />
+        <use y="-1697.5" xlinkHref="#h" transform="rotate(26.5)" />
+        <use y="-1697.5" xlinkHref="#j" transform="rotate(29.5)" />
+        <use y="-1697.5" xlinkHref="#n" transform="rotate(32.5)" />
+        <use y="-1697.5" xlinkHref="#n" transform="rotate(35.5)" />
+        <use y="-1697.5" xlinkHref="#d" transform="rotate(38.5)" />
       </g>
-      <use y="-132" x="-600" xlink:href="#o" />
-      <use y="177" x="-535" xlink:href="#o" />
-      <use y="243" x="-625" xlink:href="#p" />
-      <use y="132" x="-463" xlink:href="#q" />
-      <use y="250" x="-382" xlink:href="#p" />
-      <use y="323" x="-404" xlink:href="#r" />
-      <use y="-228" x="228" xlink:href="#o" />
-      <use y="258" x="515" xlink:href="#o" />
-      <use y="265" x="617" xlink:href="#r" />
-      <use y="323" x="545" xlink:href="#p" />
-      <use y="477" x="368" xlink:href="#p" />
-      <use y="551" x="367" xlink:href="#r" />
-      <use y="419" x="441" xlink:href="#r" />
-      <use y="382" x="500" xlink:href="#p" />
-      <use y="405" x="365" xlink:href="#r" />
-      <use y="30" x="-280" xlink:href="#p" />
-      <use y="-37" x="200" xlink:href="#r" />
-      <use y="330" xlink:href="#o" />
-      <use y="184" x="85" xlink:href="#p" />
-      <use y="118" xlink:href="#p" />
-      <use y="184" x="-74" xlink:href="#r" />
-      <use y="235" x="-37" xlink:href="#q" />
-      <use y="495" x="220" xlink:href="#p" />
-      <use y="430" x="283" xlink:href="#r" />
-      <use y="412" x="162" xlink:href="#r" />
-      <use y="390" x="-295" xlink:href="#o" />
-      <use y="575" xlink:href="#s" />
+      <use y="-132" x="-600" xlinkHref="#o" />
+      <use y="177" x="-535" xlinkHref="#o" />
+      <use y="243" x="-625" xlinkHref="#p" />
+      <use y="132" x="-463" xlinkHref="#q" />
+      <use y="250" x="-382" xlinkHref="#p" />
+      <use y="323" x="-404" xlinkHref="#r" />
+      <use y="-228" x="228" xlinkHref="#o" />
+      <use y="258" x="515" xlinkHref="#o" />
+      <use y="265" x="617" xlinkHref="#r" />
+      <use y="323" x="545" xlinkHref="#p" />
+      <use y="477" x="368" xlinkHref="#p" />
+      <use y="551" x="367" xlinkHref="#r" />
+      <use y="419" x="441" xlinkHref="#r" />
+      <use y="382" x="500" xlinkHref="#p" />
+      <use y="405" x="365" xlinkHref="#r" />
+      <use y="30" x="-280" xlinkHref="#p" />
+      <use y="-37" x="200" xlinkHref="#r" />
+      <use y="330" xlinkHref="#o" />
+      <use y="184" x="85" xlinkHref="#p" />
+      <use y="118" xlinkHref="#p" />
+      <use y="184" x="-74" xlinkHref="#r" />
+      <use y="235" x="-37" xlinkHref="#q" />
+      <use y="495" x="220" xlinkHref="#p" />
+      <use y="430" x="283" xlinkHref="#r" />
+      <use y="412" x="162" xlinkHref="#r" />
+      <use y="390" x="-295" xlinkHref="#o" />
+      <use y="575" xlinkHref="#s" />
     </svg>
   );
 };
