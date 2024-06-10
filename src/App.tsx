@@ -12,14 +12,6 @@ function App() {
   const { t } = useTranslation();
   const { STATE_CONTROLLER, DETAILS_CONTROLLER } = useCharacters();
 
-  // useEffect(() => {
-  //   const root = window.document.documentElement;
-
-  //   root.classList.remove("light", "dark");
-
-  //   // root.classList.add("dark");
-  // }, []);
-
   return (
     <main id="top" className="min-h-screen ">
       <div className="max-w-7xl m-auto p-6">
