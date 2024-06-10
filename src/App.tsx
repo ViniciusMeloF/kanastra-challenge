@@ -1,27 +1,17 @@
-import { useEffect, useState } from "react";
-import { CharacterDetails } from "./components/character-details";
+import { useState } from "react";
+import { Search } from "lucide-react";
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { api } from "./api";
-import { Info, Search } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./components/ui/tooltip";
-import Divider from "./components/divider";
+import { CharacterDetails } from "./components/character-details";
 import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import { EmptyState } from "./components/empty-state";
+import { ComicsChartSection } from "./components/comics-chart-section";
+import { CharacterListPagination } from "./components/character-list-pagination";
+import { CharacterList } from "./components/character-list";
+import { HeroSection } from "./components/hero-section";
+
+import { api } from "./api";
+import { ITEMS_PER_PAGE, scrollTo } from "./utils/pagination";
 
 function App() {
   const [characters, setCharacters] = useState<MarvelApi<Characters>>({
@@ -40,7 +30,7 @@ function App() {
           "Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.",
         name: "A-Bomb (HAS)",
         comics: {
-          available: 0,
+          available: 2,
           collectionURI:
             "http://gateway.marvel.com/v1/public/characters/1009368/comics",
         },
@@ -177,125 +167,100 @@ function App() {
     {} as Characters
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const [comicsChart, setComicsChart] = useState<any>([]);
+  const [comicsChart, setComicsChart] = useState<ChartData>({
+    categories: [],
+    series: [
+      {
+        name: "",
+        data: [],
+      },
+    ],
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Filter
   const [searchTerm, setSearchTerm] = useState("");
+  const [seriesId, setSeriesId] = useState<number | null>(null);
+
+  // useEffect(() => {
+  //   const root = window.document.documentElement;
+
+  //   root.classList.remove("light", "dark");
+
+  //   // root.classList.add("dark");
+  // }, []);
 
   const handleOpenCharacterDetails = (open: boolean) => {
     setIsOpen(open);
     setSelectedCharacter({} as Characters);
   };
 
+  const getComicsDataToChart = (data: MarvelApi<Characters>) => {
+    const series = [
+      {
+        name: "Comics",
+        data: data.results.map((char) => char.comics.available),
+      },
+    ];
+
+    const categories = data.results.map((char) => char.name);
+
+    setComicsChart({
+      series: series,
+      categories: categories,
+    });
+  };
+
   const fetchCharacters = async (page: number, searchTerm: string = "") => {
     try {
-      const offset = (page - 1) * characters.limit;
+      setIsLoading(true);
+      const offset = (page - 1) * ITEMS_PER_PAGE;
 
       const queryParams = {
         apikey: "3a1b49c04680bf0717ab0c222f363ffc",
         offset: offset.toString(),
-        limit: characters.limit.toString(),
+        limit: ITEMS_PER_PAGE.toString(),
         ...(searchTerm && { nameStartsWith: searchTerm }),
+        ...(seriesId && { series: seriesId.toString() }),
       };
       const queryString = new URLSearchParams(queryParams).toString();
 
       const { data } = await api.get<MarvelApiResponse<Characters>>(
         `https://gateway.marvel.com/v1/public/characters?${queryString}`
       );
+
       setCharacters(data);
+      getComicsDataToChart(data);
+
+      scrollTo("top");
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const getComicsDataToChart = () => {
-    const data = characters.results.map((char) => ({
-      comicsQuantity: char.comics.available,
-      character: char.name,
-    }));
-
-    setComicsChart(data);
-  };
-
-  useEffect(() => {
-    getComicsDataToChart();
-  }, [characters]);
-
   // useEffect(() => {
   //   fetchCharacters(currentPage);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const totalPages = Math.ceil(characters.total / characters.limit) || 1;
-  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
-
-  const renderPaginationItems = () => {
-    const maxVisiblePages = 2;
-    const ellipsis = -1;
-
-    let localPages = [];
-
-    if (totalPages > 5) {
-      const start = Math.max(2, currentPage - maxVisiblePages);
-      const end = Math.min(totalPages - 1, currentPage + maxVisiblePages);
-
-      if (start > 2) {
-        localPages.push(1, ellipsis);
-      } else {
-        localPages.push(1);
-      }
-
-      for (let i = start; i <= end; i++) {
-        localPages.push(i);
-      }
-
-      if (end < totalPages - 1) {
-        localPages.push(ellipsis, totalPages);
-      } else {
-        localPages.push(totalPages);
-      }
-    } else {
-      localPages = pages;
-    }
-
-    return localPages.map((page, index) => (
-      <PaginationItem key={index}>
-        {page === ellipsis ? (
-          <PaginationEllipsis />
-        ) : (
-          <PaginationLink
-            isActive={currentPage === page}
-            onClick={() => handlePageChange(page)}
-          >
-            {page}
-          </PaginationLink>
-        )}
-      </PaginationItem>
-    ));
+  const handleCardClick = (char: Characters) => {
+    setIsOpen(true);
+    setSelectedCharacter(char);
   };
 
-  console.debug(characters);
-
-  console.debug("comicsChart -> ", comicsChart);
-
   return (
-    <main className="min-h-screen ">
+    <main id="top" className="min-h-screen ">
       <div className="max-w-7xl m-auto p-6">
-        <header className="flex justify-between">
-          <div>
-            <h1 className="text-red-500 font-display text-5xl ">
-              Kanastra Marvel Challenge
-            </h1>
-            <p className="text-gray-400 text-2xl font-body">
-              Explore the diverse and iconic Marvel characters
-            </p>
-          </div>
-        </header>
+        <HeroSection />
 
-        <Divider className="my-8" />
-
-        <main>
+        <div>
           <div className="mb-8 flex gap-4">
             <Input
               value={searchTerm}
@@ -306,7 +271,7 @@ function App() {
             {/* <Input placeholder="Search by series" className="max-w-[250px]" /> */}
 
             <Button onClick={() => fetchCharacters(1, searchTerm)}>
-              <Search className="w-4 h-4 mr-2" /> Filtrar
+              <Search className="w-4 h-4 mr-2" /> Filter
             </Button>
           </div>
 
@@ -314,86 +279,27 @@ function App() {
             <EmptyState />
           ) : (
             <>
-              {/* feed-item-content d-flex flex-column pt-2 pb-2 border color-border-default rounded-2 color-shadow-small width-full height-fit */}
-              <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                <div className="flex flex-col overflow-hidden rounded-lg bg-neutral-800 flex-1 h-[315px] shadow-lg shadow-black md:col-span-1 lg:col-span-1">
-                  <div className="flex items-baseline gap-2 text-center w-full p-4">
-                    <span className="text-3xl font-body text-white">
-                      Comics
-                    </span>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <div className="bg-slate-600 rounded-full cursor-pointer hover:bg-slate-500">
-                            <Info className="h-5 w-5" />
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>
-                            Number of comics per characters listed on screen
-                          </p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
+              <ComicsChartSection
+                isLoading={isLoading}
+                comicsChartData={comicsChart}
+              />
 
-                  <div className="w-full h-full flex justify-center items-center">
-                    <div className="rounded-full border-[18px] border-neutral-700 w-52 h-52" />
-                  </div>
-                </div>
+              <CharacterList
+                characters={characters}
+                handleCardClick={handleCardClick}
+                isLoading={isLoading}
+              />
 
-                {characters.results.map((char) => (
-                  <div
-                    onClick={() => {
-                      setIsOpen(true);
-                      setSelectedCharacter(char);
-                    }}
-                    className="overflow-hidden rounded-lg bg-slate-400 flex-1 h-[315px] shadow-lg shadow-black cursor-pointer hover:transition-transform duration-300 ease-in-out hover:-translate-y-2"
-                  >
-                    <img
-                      className="w-full h-[265px] object-cover aspect-square"
-                      src={`${char.thumbnail.path}.${char.thumbnail.extension}`}
-                    />
-
-                    <div className="bg-white w-full p-2 text-center">
-                      <span className="text-red-500 font-display text-3xl text-center">
-                        {char.name}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-                {/* <div className="rounded-lg bg-slate-400 flex-1 h-[250px] shadow-lg shadow-black"></div>
-            <div className="rounded-lg bg-slate-400 flex-1 h-[250px] shadow-lg shadow-black"></div>
-            <div className="rounded-lg bg-slate-400 flex-1 h-[250px] shadow-lg shadow-black"></div> */}
-              </div>
-
-              {characters.total > 0 && characters.total > 20 && (
-                <Pagination className="mt-8">
-                  <PaginationContent>
-                    <PaginationItem>
-                      <PaginationPrevious
-                        className="cursor-pointer"
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={currentPage === 1}
-                      />
-                    </PaginationItem>
-                    {renderPaginationItems()}
-                    <PaginationItem>
-                      <PaginationNext
-                        className="cursor-pointer"
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={
-                          currentPage ===
-                          Math.ceil(characters.total / characters.limit)
-                        }
-                      />
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
+              {characters.total > 20 && (
+                <CharacterListPagination
+                  currentPage={currentPage}
+                  handlePageChange={handlePageChange}
+                  total={characters.total}
+                />
               )}
             </>
           )}
-        </main>
+        </div>
       </div>
 
       {isOpen && (

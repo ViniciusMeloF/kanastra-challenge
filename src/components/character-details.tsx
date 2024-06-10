@@ -11,7 +11,7 @@ interface CharacterDetailsProps {
   character: Characters;
 }
 
-// TODO: Adicionar tratativa de erro, separar a listagem de series/comics em um componente unico e adicionar um skeleton loading nesse componente
+// TODO: Adicionar tratativa de erro
 export function CharacterDetails({
   character,
   open,

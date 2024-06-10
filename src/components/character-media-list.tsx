@@ -1,7 +1,10 @@
 import { Loader2 } from "lucide-react";
+
 import { ScrollArea } from "./ui/scroll-area";
-import { EmptyState } from "./empty-state";
 import { Skeleton } from "./ui/skeleton";
+import { EmptyState } from "./empty-state";
+
+import { ITEMS_PER_PAGE } from "@/utils/pagination";
 
 interface CharacterMediaListProps {
   title: string;
@@ -38,13 +41,15 @@ export function CharacterMediaList({
 
       {media.results.length === 0 &&
         isLoading &&
-        Array.from({ length: 4 }).map(() => <MediaListSkeleton />)}
+        Array.from({ length: 4 }).map((_, index) => (
+          <MediaListSkeleton key={index} />
+        ))}
 
-      {media.results.length > 0 && !isLoading && (
+      {media.results.length > 0 && (
         <ScrollArea className="max-h-[300px] pr-3">
           <ul className="grid gap-2">
             {media.results.map((item) => (
-              <li className="flex items-center gap-2">
+              <li key={item.id} className="flex items-center gap-2">
                 <img
                   src={`${item?.thumbnail?.path}.${item?.thumbnail?.extension}`}
                   width={64}
@@ -60,8 +65,8 @@ export function CharacterMediaList({
             <button
               type="button"
               disabled={isLoading}
-              onClick={() => handleShowMore(media.offset + media.limit)}
-              className="text-sm text-white w-full bg-neutral-600 rounded-sm my-2 transition-colors hover:bg-neutral-800  disabled:bg-neutral-400"
+              onClick={() => handleShowMore(media.offset + ITEMS_PER_PAGE)}
+              className="text-sm text-white w-full bg-slate-800 rounded-sm my-2 cursor-pointer transition-colors hover:bg-slate-700 disabled:bg-slate-800 disabled:opacity-50 disabled:cursor-default"
             >
               {isLoading ? (
                 <div className="flex justify-center items-center">
