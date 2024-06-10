@@ -3,6 +3,8 @@
 Bem-vindos ao repositório do desafio da **Kanastra** para a posição de Software Engineer com foco em FrontEnd.
 Este README contém todas as informações e instruções necessárias.
 
+### Link para demo: https://kanastra-challenge.vercel.app/
+
 ## ✨ Tecnologias utilizadas
 
 - **ReactJS**
