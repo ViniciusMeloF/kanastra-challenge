@@ -7,8 +7,10 @@ import { MARVEL_API_URL, MARVEL_PUBLIC_KEY, api } from "@/api";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ComboBoxItemType, Combobox } from "./ui/combobox";
+import { useTranslation } from "react-i18next";
 
 export function Filters() {
+  const { t } = useTranslation();
   const { STATE_CONTROLLER } = useCharacters();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -56,12 +58,12 @@ export function Filters() {
   };
 
   return (
-    <div className="mb-8 flex gap-4">
+    <div className="mb-8 flex flex-col gap-4 lg:flex-row md:flex-row">
       <Input
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search character by name"
-        className="max-w-[250px]"
+        placeholder={t("filters.searchName")}
+        className="w-full md:w-[250px] lg:w-[250px]"
       />
 
       <Combobox
@@ -79,10 +81,10 @@ export function Filters() {
           STATE_CONTROLLER.fetchCharacters(1, searchTerm, seriesId)
         }
       >
-        <Search className="w-4 h-4 mr-2" /> Filter
+        <Search className="w-4 h-4 mr-2" /> {t("filters.filterBtn")}
       </Button>
       <Button variant="secondary" onClick={clearFilters}>
-        Clear filters
+        {t("filters.clearBtn")}
       </Button>
     </div>
   );

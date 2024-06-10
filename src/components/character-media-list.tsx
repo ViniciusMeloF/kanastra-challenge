@@ -5,6 +5,7 @@ import { Skeleton } from "./ui/skeleton";
 import { EmptyState } from "./empty-state";
 
 import { ITEMS_PER_PAGE } from "@/utils/pagination";
+import { useTranslation } from "react-i18next";
 
 interface CharacterMediaListProps {
   title: string;
@@ -28,14 +29,16 @@ export function CharacterMediaList({
   handleShowMore,
   isLoading,
 }: CharacterMediaListProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-xl font-display">{`${title} - ${media.total}`}</h3>
 
       {media.results.length === 0 && !isLoading && (
         <EmptyState
-          title={`No ${title} Found`}
-          description="It looks like there are no comics to display at the moment."
+          title={t("mediaEmptyState.title")}
+          description={t("mediaEmptyState.description")}
         />
       )}
 
@@ -71,10 +74,10 @@ export function CharacterMediaList({
               {isLoading ? (
                 <div className="flex justify-center items-center">
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Carregando
+                  {t("loading")}
                 </div>
               ) : (
-                "Show more"
+                <span>{t("pagination.showMoreBtn")}</span>
               )}
             </button>
           )}

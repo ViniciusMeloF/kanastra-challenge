@@ -6,8 +6,10 @@ import { CharacterList } from "./components/character-list";
 import { HeroSection } from "./components/hero-section";
 import { Filters } from "./components/filters";
 import { useCharacters } from "./contexts/CharactersContext";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
   const { STATE_CONTROLLER, DETAILS_CONTROLLER } = useCharacters();
 
   // useEffect(() => {
@@ -28,8 +30,8 @@ function App() {
 
           {STATE_CONTROLLER.isError && !STATE_CONTROLLER.isLoading && (
             <EmptyState
-              title="There was a problem"
-              description="Try again later."
+              title={t("emptyError.title")}
+              description={t("emptyError.description")}
             />
           )}
 

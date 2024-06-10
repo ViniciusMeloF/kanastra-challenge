@@ -17,6 +17,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { debounce } from "@/utils/debounce";
+import { useTranslation } from "react-i18next";
 
 export type ComboBoxItemType = {
   value: string;
@@ -38,6 +39,7 @@ export function Combobox({
   onSelect,
   isLoading,
 }: ComboboxProps) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   const handleOnSearchChange = (e: string) => {
@@ -60,7 +62,7 @@ export function Combobox({
           type="button"
           role="combobox"
           aria-expanded={open}
-          className="w-[250px] justify-between "
+          className="w-full md:w-[300px] lg:w-[300px] justify-between "
         >
           {value ? (
             <span className="font-normal">
@@ -68,30 +70,30 @@ export function Combobox({
             </span>
           ) : (
             <span className="text-muted-foreground font-normal">
-              Search character by serie
+              {t("filters.searchSeries")}
             </span>
           )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-[250px] p-0">
+      <PopoverContent className="w-[300px] p-0">
         <Command shouldFilter={false}>
           <CommandInput
             onValueChange={debouncedHandleOnSearchChange}
-            placeholder="Search series..."
+            placeholder={t("filters.comboboxInputPlaceholder")}
           />
           <CommandList>
             {isLoading && (
               <div className="flex justify-center items-center my-2">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Carregando
+                {t("loading")}
               </div>
             )}
 
             {!isLoading && (
               <>
-                <CommandEmpty>No series found.</CommandEmpty>
+                <CommandEmpty>{t("filters.comboboxEmpty")}</CommandEmpty>
                 <CommandGroup>
                   {items.map((item) => (
                     <CommandItem

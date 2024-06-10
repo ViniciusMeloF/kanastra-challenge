@@ -8,8 +8,10 @@ import { ITEMS_PER_PAGE } from "@/utils/pagination";
 
 import { CharacterMediaList } from "./character-media-list";
 import { EmptyState } from "./empty-state";
+import { useTranslation } from "react-i18next";
 
 export function CharacterDetails() {
+  const { t } = useTranslation();
   const { DETAILS_CONTROLLER } = useCharacters();
 
   const [isLoadingComics, setIsLoadingComics] = useState(true);
@@ -109,12 +111,12 @@ export function CharacterDetails() {
         <main className="grid md:grid-cols-2 gap-6">
           {isErrorComics ? (
             <EmptyState
-              title="There was a problem"
-              description="Try again later."
+              title={t("emptyError.title")}
+              description={t("emptyError.description")}
             />
           ) : (
             <CharacterMediaList
-              title="Comics"
+              title={t("comics")}
               media={comics}
               isLoading={isLoadingComics}
               handleShowMore={fetchComics}
@@ -123,12 +125,12 @@ export function CharacterDetails() {
 
           {isErrorSeries ? (
             <EmptyState
-              title="There was a problem"
-              description="Try again later."
+              title={t("emptyError.title")}
+              description={t("emptyError.description")}
             />
           ) : (
             <CharacterMediaList
-              title="Series"
+              title={t("series")}
               media={series}
               isLoading={isLoadingSeries}
               handleShowMore={fetchSeries}

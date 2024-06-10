@@ -1,0 +1,37 @@
+{
+  "translation": {
+    "language": "Language",
+    "welcome": "Explore the diverse and iconic Marvel characters",
+    "loading": "Loading",
+    "comics": "Comics",
+    "series": "Series",
+    "tooltip": {
+      "comicsChart": "Number of comics per characters listed on screen"
+    },
+    "pagination": {
+      "previousBtn": "Previous",
+      "nextBtn": "Next",
+      "showMoreBtn": "Show more"
+    },
+    "filters": {
+      "filterBtn": "Filter",
+      "clearBtn": "Clear filters",
+      "searchName": "Search character by name",
+      "searchSeries": "Search character by serie",
+      "comboboxInputPlaceholder": "Search series...",
+      "comboboxEmpty": "No series found."
+    },
+    "emptyState": {
+      "title": "No marvel characters found",
+      "description": "It looks like there are no Marvel characters to display at the moment."
+    },
+    "mediaEmptyState": {
+      "title": "No content found",
+      "description": "There appears to be no content to display at this time."
+    },
+    "emptyError": {
+      "title": "There was a problem",
+      "description": "Try again later."
+    }
+  }
+}

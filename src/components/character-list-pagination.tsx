@@ -10,8 +10,10 @@ import {
   PaginationPrevious,
 } from "./ui/pagination";
 import { useCharacters } from "@/contexts/CharactersContext";
+import { useTranslation } from "react-i18next";
 
 export function CharacterListPagination() {
+  const { t } = useTranslation();
   const { PAGINATION_CONTROLLER, STATE_CONTROLLER } = useCharacters();
 
   const total = STATE_CONTROLLER.characters.total;
@@ -76,7 +78,9 @@ export function CharacterListPagination() {
               )
             }
             disabled={PAGINATION_CONTROLLER.currentPage === 1}
-          />
+          >
+            <span>{t("pagination.previousBtn")}</span>
+          </PaginationPrevious>
         </PaginationItem>
 
         {renderPaginationItems()}
@@ -93,7 +97,9 @@ export function CharacterListPagination() {
               PAGINATION_CONTROLLER.currentPage ===
               Math.ceil(total / ITEMS_PER_PAGE)
             }
-          />
+          >
+            <span>{t("pagination.nextBtn")}</span>
+          </PaginationNext>
         </PaginationItem>
       </PaginationContent>
     </Pagination>

@@ -1,0 +1,37 @@
+{
+  "translation": {
+    "language": "Idioma",
+    "welcome": "Explore os diversos e icônicos personagens da Marvel",
+    "loading": "Carregando",
+    "comics": "Quadrinhos",
+    "series": "Séries",
+    "tooltip": {
+      "comicsChart": "Número de quadrinhos por personagem listados em tela"
+    },
+    "pagination": {
+      "previousBtn": "Anterior",
+      "nextBtn": "Próximo",
+      "showMoreBtn": "Carregar mais"
+    },
+    "filters": {
+      "filterBtn": "Filtrar",
+      "clearBtn": "Limpar filtros",
+      "searchName": "Busque os personagens pelo nome",
+      "searchSeries": "Busque os personagens pela série",
+      "comboboxInputPlaceholder": "Buscar séries...",
+      "comboboxEmpty": "Nenhuma série encontrada."
+    },
+    "emptyState": {
+      "title": "Nenhum personagem da Marvel encontrado",
+      "description": "Parece que não há personagens da Marvel para exibir no momento."
+    },
+    "mediaEmptyState": {
+      "title": "Nenhum conteudo encontrado",
+      "description": "Parece que não há conteudo para exibir no momento."
+    },
+    "emptyError": {
+      "title": "Houve um problema",
+      "description": "Tente novamente mais tarde."
+    }
+  }
+}
