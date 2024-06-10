@@ -40,7 +40,7 @@ Após a aplicacao estar em execução, acesse `http://localhost:5173` e você se
 
 ## 🧪 Testes Unitários com Vitest
 
-Para assegurar a qualidade e o correto funcionamento das funcionalidades do sistema, é essencial realizar testes unitários. Siga os comandos abaixo para executar os testes no ambiente Docker:
+Para assegurar a qualidade e o correto funcionamento das funcionalidades do sistema, é essencial realizar testes unitários. Siga os comandos abaixo para executar os testes:
 
 1. **Execução dos Testes**:
 
