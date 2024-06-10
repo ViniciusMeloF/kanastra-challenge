@@ -11,6 +11,8 @@ Este README contém todas as informações e instruções necessárias.
 - **Shadcn/ui**
 - **React Apex Charts**
 - **Vitest**
+- **Testing-library**
+- **i18next**
 
 ## 🚀 Instruções de Execução
 
@@ -43,18 +45,13 @@ Para assegurar a qualidade e o correto funcionamento das funcionalidades do sist
 1. **Execução dos Testes**: Dentro do container, execute os testes com o `pytest`:
 
    ```sh
-   npm run vitest
+   npm run test
    ```
 
 2. **Relatório de Cobertura**: Após a execução dos testes, gere o relatório de cobertura:
 
    ```sh
    npm run coverage
-   ```
-
-3. **Relatório HTML**: Para uma visualização mais detalhada e formatada, gere o relatório em HTML:
-   ```sh
-   npm run coverage html
    ```
 
 ## 📬 Contato

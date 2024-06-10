@@ -16,7 +16,7 @@ interface CharacterMediaListProps {
 
 const MediaListSkeleton = () => {
   return (
-    <div className="flex items-center gap-2">
+    <div data-testid="loading-media-list" className="flex items-center gap-2">
       <Skeleton className="w-16 h-16 min-w-16 min-h-16 rounded-lg" />
       <Skeleton className="h-6 w-full" />
     </div>

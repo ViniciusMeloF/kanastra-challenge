@@ -10,6 +10,7 @@ export function CharacterList() {
         Array.from({ length: 4 }).map((_, index) => (
           <Skeleton
             key={index}
+            data-testid="character-list-loading"
             className="w-full h-[315px] rounded-lg border-4 flex"
           />
         ))
