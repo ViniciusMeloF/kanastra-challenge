@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 
-import { api, MARVEL_PUBLIC_KEY } from "@/api";
+import { api, MARVEL_API_URL, MARVEL_PUBLIC_KEY } from "@/api";
 import { CHARTS_INITIAL_STATE, MARVEL_INITIAL_STATE } from "@/utils/constants";
 import { ITEMS_PER_PAGE, scrollTo } from "@/utils/pagination";
 
@@ -93,7 +93,7 @@ const CharactersProvider = ({ children }: ICharactersProviderProps) => {
       const queryString = new URLSearchParams(queryParams).toString();
 
       const { data } = await api.get<MarvelApiResponse<Characters>>(
-        `https://gateway.marvel.com/v1/public/characters?${queryString}`
+        `${MARVEL_API_URL}/characters?${queryString}`
       );
 
       setCharacters(data);

@@ -3,17 +3,21 @@
 Bem-vindos ao repositório do desafio da **Kanastra** para a posição de Software Engineer com foco em FrontEnd.
 Este README contém todas as informações e instruções necessárias.
 
-## ✨ Funcionalidades
+## ✨ Tecnologias utilizadas
 
-- **Frontend ReactJS**: Ao acessar a aplicação, você será calorosamente recebido pela tela "Hello Kanastra".
-- **Testes Unitários:** Testes unitários implementados utilizando vitest para garantir a qualidade e a confiabilidade do código.
+- **ReactJS**
+- **Typescript**
+- **TailwindCSS**
+- **Shadcn/ui**
+- **React Apex Charts**
+- **Vitest**
 
 ## 🚀 Instruções de Execução
 
 ### Pré-requisitos
 
-- Node ^v16.17.1
-- NPM ^8.15.0
+- Node **v16.17.1** ou superior
+- NPM **v8.15.0** ou superior
 
 1. **Instalar dependecias**: Vamos garantir que todas as dependecias estejam instaladas.
    Execute o comando:

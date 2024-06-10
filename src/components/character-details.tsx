@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useCharacters } from "@/contexts/CharactersContext";
 import { MARVEL_INITIAL_STATE } from "@/utils/constants";
-import { api } from "@/api";
+import { MARVEL_PUBLIC_KEY, api } from "@/api";
+import { ITEMS_PER_PAGE } from "@/utils/pagination";
 
 import { CharacterMediaList } from "./character-media-list";
 import { EmptyState } from "./empty-state";
@@ -25,8 +26,15 @@ export function CharacterDetails() {
       setIsLoadingComics(true);
       setIsErrorComics(false);
 
+      const queryParams = {
+        apikey: MARVEL_PUBLIC_KEY,
+        offset: offset.toString(),
+        limit: ITEMS_PER_PAGE.toString(),
+      };
+      const queryString = new URLSearchParams(queryParams).toString();
+
       const { data } = await api.get<MarvelApiResponse<Comics>>(
-        `${DETAILS_CONTROLLER.selectedCharacter.comics?.collectionURI}?apikey=3a1b49c04680bf0717ab0c222f363ffc&offset=${offset}`
+        `${DETAILS_CONTROLLER.selectedCharacter.comics?.collectionURI}?${queryString}`
       );
 
       setComics((prevComics) => ({
@@ -45,8 +53,15 @@ export function CharacterDetails() {
       setIsLoadingSeries(true);
       setIsErrorSeries(false);
 
+      const queryParams = {
+        apikey: MARVEL_PUBLIC_KEY,
+        offset: offset.toString(),
+        limit: ITEMS_PER_PAGE.toString(),
+      };
+      const queryString = new URLSearchParams(queryParams).toString();
+
       const { data } = await api.get<MarvelApiResponse<Series>>(
-        `${DETAILS_CONTROLLER.selectedCharacter.series?.collectionURI}?apikey=3a1b49c04680bf0717ab0c222f363ffc&offset=${offset}`
+        `${DETAILS_CONTROLLER.selectedCharacter.series?.collectionURI}?${queryString}`
       );
 
       setSeries((prevSeries) => ({
