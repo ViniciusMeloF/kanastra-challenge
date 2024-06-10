@@ -42,7 +42,7 @@ Após a aplicacao estar em execução, acesse `http://localhost:5173` e você se
 
 Para assegurar a qualidade e o correto funcionamento das funcionalidades do sistema, é essencial realizar testes unitários. Siga os comandos abaixo para executar os testes no ambiente Docker:
 
-1. **Execução dos Testes**: Dentro do container, execute os testes com o `pytest`:
+1. **Execução dos Testes**:
 
    ```sh
    npm run test
